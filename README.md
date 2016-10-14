@@ -1,0 +1,2 @@
+# SentenceGenerator
+markov chain?
