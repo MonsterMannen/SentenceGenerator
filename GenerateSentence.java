@@ -1,5 +1,8 @@
+import java.util.*;
+
 public class GenerateSentence {
     private Node head;
+    private Node foundNode = null;
 
     public GenerateSentence(){
         head = new Node("xxx");
@@ -7,13 +10,14 @@ public class GenerateSentence {
 
     public void insertSentence(String sentence){
         Node temp = head;
-        Node n;
+        Node n = null;
+        foundNode = null;   // reset
         for(String word : sentence.split(" ")){
-            foundNode = findNode(word, head);
-            if(foundNode != null){
-                n = foundNode;
-            }else{
+            findNode(word, head);   // sets foundNode
+            if(foundNode == null){
                 n = new Node(word);
+            }else{
+                n = foundNode;
             }
             temp.addChild(n);
             temp = n;
@@ -32,21 +36,20 @@ public class GenerateSentence {
             temp = n;
         }
         String sentence = "";
-        for(Node n : nodes){
-            sentence += n.getWord();
+        for(Node node : nodes){
+            sentence += node.getWord() + " ";
         }
         return sentence;
     }
 
-    private Node findNode(String word, Node start){
-        if(start.getWord.equals(word)){
-            return start;
+    private void findNode(String word, Node start){
+        if(start.getWord().equals(word)){
+            foundNode = start;
         }else{
-            for(Node child : start.getChildren){
+            for(Node child : start.getChildren()){
                 findNode(word, child);
             }
         }
-        // does this return NULL if word is not found?
     }
 
     // no javac on this shitcomputer
@@ -57,7 +60,7 @@ public class GenerateSentence {
         gs.insertSentence("hej jag är fisk");
         gs.insertSentence("hundar har pinnar");
         gs.insertSentence("katter har knivar");
-        String s = gs.GenerateSentence();
+        String s = gs.createSentence();
         System.out.println(s);
     }
 }

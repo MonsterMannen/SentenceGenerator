@@ -15,14 +15,16 @@ public class Node {
 
     // returns a random child node or a self ref if end
     public Node getRandomChild(){
-        Node[] nodes = new Node[end + children.size()];
-        for(int i = 0; i < children; i++){
+        Node[] nodes = new Node[ends + children.size()];
+        for(int i = 0; i < children.size(); i++){
             nodes[i] = children.get(i);
         }
         for(int j = 0; j < ends; j++){
-            nodes[childred.size() + j] = this;  // self ref for every end
+            nodes[children.size() + j] = this;  // self ref for every end
         }
-        int r = (int)(Math.random() * (nodes.length + 1))
+        int r = (int)(Math.random() * (nodes.length));  // removed (+1)
+        System.out.println(nodes.length);
+        System.out.println(r);
         return nodes[r];
     }
 
