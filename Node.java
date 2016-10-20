@@ -23,8 +23,7 @@ public class Node {
             nodes[children.size() + j] = this;  // self ref for every end
         }
         int r = (int)(Math.random() * (nodes.length));  // removed (+1)
-        System.out.println(nodes.length);
-        System.out.println(r);
+        System.out.println("word:" + word + " childs:" + children.size() + " ends:" + ends + " r:" + r);   // test
         return nodes[r];
     }
 
