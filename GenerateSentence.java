@@ -3,6 +3,7 @@ import java.util.*;
 public class GenerateSentence {
     private Node head;
     private Node foundNode = null;
+    public static boolean debug = false;
 
     public GenerateSentence(){
         head = new Node("xxx");
@@ -16,12 +17,12 @@ public class GenerateSentence {
             findNode(word, head);   // sets foundNode
             if(foundNode == null){
                 n = new Node(word);
-                System.out.print("NewNode:" + word);
+                print("NewNode:" + word);
             }else{
                 n = foundNode;
-                System.out.print("ExistingNode:" + word);
+                print("ExistingNode:" + word);
             }
-            System.out.println(" parent:" + temp.getWord());
+            print(" parent:" + temp.getWord() + "\n");
             temp.addChild(n);
             temp = n;
         }
@@ -55,24 +56,25 @@ public class GenerateSentence {
         }
     }
 
-    // test
-    private void printNodes(){
-
+    public static void print(String s){
+        if(debug) System.out.print(s);
     }
 
-    // no javac on this shitcomputer
-    // compile and test for me :^)
     public static void main(String[] args){
         GenerateSentence gs = new GenerateSentence();
-        //gs.insertSentence("hello I'm a fish");
-        //gs.insertSentence("hello I'm fish");
-        //gs.insertSentence("dogs have swag");
-        //gs.insertSentence("cats have knives");
+        if(args.length > 0){
+            if(args[0].equals("-d")) debug = true;
+        }
 
-        gs.insertSentence("I like rabbits");
-        gs.insertSentence("I like turtles");
-        gs.insertSentence("I like dogs");
-        gs.insertSentence("I don't like rabbits");
+        String[] sentences = {
+            "asus monitor 144hz",
+            "monitor the cameras",
+            "gpu asus"
+        };
+
+        for(String sentece : sentences){
+            gs.insertSentence(sentece);
+        }
 
         String s = gs.createSentence();
         System.out.println(s);
